@@ -1,29 +1,39 @@
-# GCC TAVI Market Opportunity Model & Commercial Strategy
-*An End-to-End Market Sizing, Hospital Prioritization, and Commercial Go-to-Market Framework for TAVI (Structural Heart) Systems across the GCC.*
+# 🫀 GCC TAVI Market Opportunity & Commercial Analytics Model
+
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://tavi-gcc-market-opportunity-mode-lh4pkxnnzpkzmyhgne5epx.streamlit.app/)
+
+A comprehensive end-to-end commercial analytics and market sizing framework tailored for Transcatheter Aortic Valve Implantation (TAVI) across the Gulf Cooperation Council (GCC) healthcare landscape, with a primary strategic focus on **Abbott’s Navitor™ System** and Saudi Arabia's **NUPCO** procurement framework.
 
 ---
 
-## Executive Summary
-
-The Transcatheter Aortic Valve Implantation (TAVI) market across the Gulf Cooperation Council (GCC) region represents a high-growth opportunity driven by aging demographics, expanding healthcare infrastructure, and recent regulatory milestones—notably the expanded CE Mark approval for Abbott's Navitor™ TAVI system covering low-to-intermediate risk patients.
-
-Despite clinical efficacy proven in global trials (e.g., VANTAGE trial showing 97% technical success with no moderate/severe PVL at 30 days), regional published epidemiological data remains fragmented (limited to registries such as Gulf TAVR, single-center data from Qatar, and small cohort studies in Jeddah). 
-
-This project delivers a **quantitative market sizing model (Python)**, a **hospital prioritization matrix incorporating operational cath lab dynamics**, and a **strategic commercial go-to-market plan** tailored for structural heart business units targeting GCC markets (with a specific focus on Saudi Arabia's NUPCO framework).
+## 🚀 Live Interactive Dashboard
+Explore the live analytics platform, filters, and clinical performance models here:  
+👉 **[GCC TAVI Market & Clinical Dashboard on Streamlit](https://tavi-gcc-market-opportunity-mode-lh4pkxnnzpkzmyhgne5epx.streamlit.app/)**
 
 ---
 
-## Key Features & Architecture
-
-- **Epidemiological Funnel & Scenario Forecasting (Python):** Quantifies severe Aortic Stenosis (AS) patient pools across 6 GCC countries using clinical meta-analysis benchmarks ($3.4\%$ prevalence in $65+$ population, $75.6\%$ symptomatic, $40.5\%$ surgical non-candidates/unmanaged). Outputs three penetration scenarios: Conservative ($15\%$), Base ($25\%$), and Aggressive ($35\%$).
-- **Clinical & Operational Center Prioritization Matrix:** A scoring algorithm that rates target hospitals based on Heart Team multidisciplinary presence, Cath Lab/OR hybrid volume capacity, procurement pathways (MOH/NUPCO vs. Private), and inventory turnover efficiency.
-- **Supply Chain & Inventory Reality Integration:** Incorporates real-world clinical workflow constraints—including sizing portfolio management, echo/CT workup lead times, and NUPCO e-catalogue framework compliance in KSA.
-- **Executive Power BI Dashboard Integration:** Clean data schemas generated for direct ingestion into Power BI executive views.
+## 📊 Project Architecture & Key Features
+1. **Market Sizing & Funnel Modeling:** Utilizes clinical meta-analysis benchmarks (severe AS prevalence, symptomatic rates, and untreated cohorts) to project addressable market volumes across KSA, UAE, Kuwait, Qatar, Oman, and Bahrain.
+2. **Target Account Tiering:** Evaluates high-volume reference cardiac centers (Tier-1 hubs such as KSMC, KFMC, and NGHA) based on bed capacity, Heart Team status, and hybrid OR readiness.
+3. **Clinical & Safety Analytics:** Compares device performance metrics, focusing on 30-day Paravalvular Leak (PVL) severity profiles and procedural success rates.
+4. **Procurement Alignment:** Integrates NUPCO e-catalogue frameworks and regional tender channels to streamline market access and supply chain efficiency.
 
 ---
 
-## Clinical Market Funnel Methodology
+## 🛠️ Tech Stack & Repository Structure
+* **Python (Pandas, NumPy, Plotly):** Automated data modeling, simulation, and chart generation.
+* **Streamlit:** Interactive web application framework for executive data storytelling.
+* **GitHub:** Version control, documentation, and continuous deployment.
 
-The forecasting pipeline converts raw population demographics into actionable procedure volume projections:
-
-$$\text{Eligible Patient Pool} = \text{Pop}_{65+} \times 0.034 \text{ (Severe AS)} \times 0.756 \text{ (Symptomatic)} \times 0.405 \text{ (Unmanaged/Eligible)}$$
+```text
+TAVI-GCC-market-opportunity-mode/
+├── app.py                         # Interactive Streamlit Dashboard application
+├── requirements.txt               # Required Python packages for deployment
+├── README.md                      # Executive Project Documentation & Live Link
+├── python/
+│   └── tavi_market_model.py       # Market sizing logic & scenario forecasting
+├── docs/
+│   └── One_Page_Annual_Action_Plan.md # 2026 Strategic Commercial Action Plan
+└── data/
+    ├── GCC_TAVI_Granular_Cases_Model.csv # Simulated clinical & procedure dataset (13,490+ records)
+    └── Target_Hospitals_Scoring.csv     # GCC reference hospital tiering matrix
