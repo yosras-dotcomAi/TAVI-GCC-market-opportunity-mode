@@ -9,16 +9,11 @@ st.set_page_config(
     layout="wide"
 )
 
-# Load Datasets directly from root folder
+# Load Datasets from data folder
 @st.cache_data
 def load_data():
-    try:
-        cases_df = pd.read_csv("GCC_TAVI_Granular_Cases_Model.csv")
-        hospitals_df = pd.read_csv("Target_Hospitals_Scoring.csv")
-    except FileNotFoundError:
-        # Fallback if placed inside data folder
-        cases_df = pd.read_csv("data/GCC_TAVI_Granular_Cases_Model.csv")
-        hospitals_df = pd.read_csv("data/Target_Hospitals_Scoring.csv")
+    cases_df = pd.read_csv("data/GCC_TAVI_Granular_Cases_Model.csv")
+    hospitals_df = pd.read_csv("data/Target_Hospitals_Scoring.csv")
     return cases_df, hospitals_df
 
 cases_df, hospitals_df = load_data()
