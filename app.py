@@ -10,11 +10,10 @@ st.set_page_config(
     layout="wide"
 )
 
-# Load or Generate Data automatically to prevent any FileNotFoundError
+# Load or Generate Data automatically
 @st.cache_data
 def load_data():
     try:
-        # Try loading from data folder or root
         if pd.io.common.file_exists("data/GCC_TAVI_Granular_Cases_Model.csv"):
             cases_df = pd.read_csv("data/GCC_TAVI_Granular_Cases_Model.csv")
             hospitals_df = pd.read_csv("data/Target_Hospitals_Scoring.csv")
@@ -24,14 +23,12 @@ def load_data():
         else:
             raise FileNotFoundError
     except:
-        # Fallback: Auto-generate robust sample data instantly if files are missing
         np.random.seed(42)
         countries = ['Saudi Arabia', 'UAE', 'Kuwait', 'Qatar', 'Oman', 'Bahrain']
         hospitals = ['KSMC', 'KFMC', 'KFSH&RC', 'NGHA', 'Cleveland Clinic', 'Hamad Medical Corp']
         devices = ['Abbott Navitor', 'Medtronic Evolut PRO+', 'Edwards SAPIEN 3 Ultra', 'Boston Scientific ACURATE']
         risks = ['Low Risk', 'Intermediate Risk', 'High Risk / Inoperable']
         pvl_opts = ['None / Trace', 'Mild', 'Moderate', 'Severe']
-        channels = ['NUPCO Framework (KSA)', 'Direct MOH Tender', 'Private Insurance']
         
         data = []
         for i in range(1500):
@@ -98,7 +95,8 @@ with tab1:
 
 with tab2:
     st.subheader("30-Day Paravalvular Leak (PVL) Severity Comparison")
-    fig_pvl = px.histogram(filtered_df, x="Device_Brand", color="PVL_Severity_30D", barmode="fill", title="PVL Safety Profile Across TAVI Systems")
+    # Fixed chart type to avoid grouping/fill errors
+    fig_pvl = px.histogram(filtered_df, x="Device_Brand", color="PVL_Severity_30D", barmode="group", title="PVL Safety Profile Across TAVI Systems")
     st.plotly_chart(fig_pvl, use_container_width=True)
 
 with tab3:
