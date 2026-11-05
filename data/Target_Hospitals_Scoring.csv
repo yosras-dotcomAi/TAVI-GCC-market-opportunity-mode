@@ -1,0 +1,147 @@
+import pandas as pd
+import numpy as np
+
+# Set random seed for reproducibility
+np.random.seed(42)
+
+# 1. Countries and Hospitals Data
+hospitals_data = [
+    # Saudi Arabia (KSA)
+    {'Country': 'Saudi Arabia', 'City': 'Riyadh', 'Hospital_Name': 'King Saud Medical City (KSMC)', 'Sector': 'Government (MOH)', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 1400, 'Base_Annual_Volume': 180},
+    {'Country': 'Saudi Arabia', 'City': 'Riyadh', 'Hospital_Name': 'King Fahad Medical City (KFMC)', 'Sector': 'Government (MOH)', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 1200, 'Base_Annual_Volume': 160},
+    {'Country': 'Saudi Arabia', 'City': 'Riyadh', 'Hospital_Name': 'King Faisal Specialist Hospital & RC', 'Sector': 'Government (Quasi)', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 1600, 'Base_Annual_Volume': 220},
+    {'Country': 'Saudi Arabia', 'City': 'Riyadh', 'Hospital_Name': 'King Abdulaziz Medical City (NGHA)', 'Sector': 'Military / NGHA', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 1500, 'Base_Annual_Volume': 190},
+    {'Country': 'Saudi Arabia', 'City': 'Riyadh', 'Hospital_Name': 'Prince Sultan Cardiac Center (PSCC)', 'Sector': 'Military / MOD', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 900, 'Base_Annual_Volume': 250},
+    {'Country': 'Saudi Arabia', 'City': 'Riyadh', 'Hospital_Name': 'Dallah Hospital (Al Nakheel)', 'Sector': 'Private', 'Tier': 'Tier 2', 'Heart_Team_Status': 'Developing', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 500, 'Base_Annual_Volume': 75},
+    {'Country': 'Saudi Arabia', 'City': 'Jeddah', 'Hospital_Name': 'King Fahd General Hospital', 'Sector': 'Government (MOH)', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 800, 'Base_Annual_Volume': 130},
+    {'Country': 'Saudi Arabia', 'City': 'Jeddah', 'Hospital_Name': 'King Faisal Specialist Hospital - Jeddah', 'Sector': 'Government (Quasi)', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 650, 'Base_Annual_Volume': 140},
+    {'Country': 'Saudi Arabia', 'City': 'Jeddah', 'Hospital_Name': 'International Medical Center (IMC)', 'Sector': 'Private', 'Tier': 'Tier 2', 'Heart_Team_Status': 'Developing', 'Hybrid_OR': 'No', 'Bed_Capacity': 300, 'Base_Annual_Volume': 50},
+    {'Country': 'Saudi Arabia', 'City': 'Dammam', 'Hospital_Name': 'Saud Al-Babtain Cardiac Center', 'Sector': 'Government (MOH)', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 400, 'Base_Annual_Volume': 170},
+    {'Country': 'Saudi Arabia', 'City': 'Dhahran', 'Hospital_Name': 'King Fahd Military Medical Complex', 'Sector': 'Military / MOD', 'Tier': 'Tier 2', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 600, 'Base_Annual_Volume': 90},
+    {'Country': 'Saudi Arabia', 'City': 'Makkah', 'Hospital_Name': 'King Abdullah Medical City (KAMC)', 'Sector': 'Government (MOH)', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 550, 'Base_Annual_Volume': 150},
+    {'Country': 'Saudi Arabia', 'City': 'Madinah', 'Hospital_Name': 'Madinah Cardiac Center', 'Sector': 'Government (MOH)', 'Tier': 'Tier 2', 'Heart_Team_Status': 'Developing', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 350, 'Base_Annual_Volume': 85},
+
+    # UAE
+    {'Country': 'UAE', 'City': 'Abu Dhabi', 'Hospital_Name': 'Cleveland Clinic Abu Dhabi', 'Sector': 'Government / Private', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 400, 'Base_Annual_Volume': 160},
+    {'Country': 'UAE', 'City': 'Abu Dhabi', 'Hospital_Name': 'Sheikh Shakhbout Medical City (SSMC)', 'Sector': 'Government (SEHA)', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 740, 'Base_Annual_Volume': 110},
+    {'Country': 'UAE', 'City': 'Dubai', 'Hospital_Name': 'Dubai Hospital (DHA)', 'Sector': 'Government (DHA)', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 600, 'Base_Annual_Volume': 125},
+    {'Country': 'UAE', 'City': 'Dubai', 'Hospital_Name': 'American Hospital Dubai', 'Sector': 'Private', 'Tier': 'Tier 2', 'Heart_Team_Status': 'Developing', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 250, 'Base_Annual_Volume': 60},
+    {'Country': 'UAE', 'City': 'Sharjah', 'Hospital_Name': 'Al Qassimi Hospital', 'Sector': 'Government (EHS)', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 500, 'Base_Annual_Volume': 140},
+
+    # Kuwait
+    {'Country': 'Kuwait', 'City': 'Kuwait City', 'Hospital_Name': 'Sabah Al-Ahmed Cardiac Centre', 'Sector': 'Government (MOH)', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 300, 'Base_Annual_Volume': 190},
+    {'Country': 'Kuwait', 'City': 'Kuwait City', 'Hospital_Name': 'Chest Diseases Hospital', 'Sector': 'Government (MOH)', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 280, 'Base_Annual_Volume': 175},
+    {'Country': 'Kuwait', 'City': 'Jabriya', 'Hospital_Name': 'Hadi Hospital', 'Sector': 'Private', 'Tier': 'Tier 3', 'Heart_Team_Status': 'Planned', 'Hybrid_OR': 'No', 'Bed_Capacity': 150, 'Base_Annual_Volume': 30},
+
+    # Qatar
+    {'Country': 'Qatar', 'City': 'Doha', 'Hospital_Name': 'Heart Hospital (Hamad Medical Corp)', 'Sector': 'Government (HMC)', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 120, 'Base_Annual_Volume': 210},
+    {'Country': 'Qatar', 'City': 'Doha', 'Hospital_Name': 'The View Hospital (in affil. with Cedars-Sinai)', 'Sector': 'Private', 'Tier': 'Tier 2', 'Heart_Team_Status': 'Developing', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 240, 'Base_Annual_Volume': 45},
+
+    # Oman
+    {'Country': 'Oman', 'City': 'Muscat', 'Hospital_Name': 'National Heart Center (Royal Hospital)', 'Sector': 'Government (MOH)', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 650, 'Base_Annual_Volume': 130},
+    {'Country': 'Oman', 'City': 'Muscat', 'Hospital_Name': 'Sultan Qaboos University Hospital', 'Sector': 'Government (Academic)', 'Tier': 'Tier 2', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 500, 'Base_Annual_Volume': 80},
+
+    # Bahrain
+    {'Country': 'Bahrain', 'City': 'Riffa', 'Hospital_Name': 'Mohammed bin Khalifa bin Salman Al Khalifa Specialist Cardiac Centre', 'Sector': 'Military / Government', 'Tier': 'Tier 1', 'Heart_Team_Status': 'Established', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 150, 'Base_Annual_Volume': 150},
+    {'Country': 'Bahrain', 'City': 'Manama', 'Hospital_Name': 'King Hamad University Hospital', 'Sector': 'Government (Academic)', 'Tier': 'Tier 2', 'Heart_Team_Status': 'Developing', 'Hybrid_OR': 'Yes', 'Bed_Capacity': 310, 'Base_Annual_Volume': 55}
+]
+
+hospitals_df = pd.DataFrame(hospitals_data)
+
+# 2. Generate Granular Simulated Patient Case Logs (Years 2023 - 2026)
+# Generate ~2,500 patient case records across GCC centers to provide rich telemetry for Streamlit
+case_records = []
+case_id_counter = 10001
+
+devices = ['Abbott Navitor', 'Medtronic Evolut PRO+', 'Edwards SAPIEN 3 Ultra', 'Boston Scientific ACURATE neo2']
+device_weights = [0.35, 0.32, 0.25, 0.08] # Navitor carrying strong share in simulation
+
+risk_categories = ['Low Risk', 'Intermediate Risk', 'High Risk / Inoperable']
+risk_weights = [0.25, 0.45, 0.30] # Showing post-2025 shift to low/intermediate risk
+
+access_routes = ['Transfemoral', 'Transapical', 'Subclavian / Axillary', 'Transcaval']
+access_weights = [0.91, 0.04, 0.03, 0.02]
+
+pvl_outcomes = ['None / Trace', 'Mild', 'Moderate', 'Severe']
+pvl_weights_navitor = [0.88, 0.10, 0.02, 0.00]
+pvl_weights_others = [0.78, 0.17, 0.04, 0.01]
+
+procurement_channels = ['NUPCO Framework (KSA)', 'Direct MOH Tender', 'Hospital Consignment', 'Private Insurance / Out-of-Pocket']
+
+valve_sizes = ['23mm', '25mm', '27mm', '29mm']
+
+start_date = pd.to_datetime('2023-01-01')
+end_date = pd.to_datetime('2026-10-31')
+
+for index, hosp in hospitals_df.iterrows():
+    # Number of cases over ~3.8 years based on annual volume
+    total_cases_hosp = int(hosp['Base_Annual_Volume'] * 3.8)
+    
+    dates = pd.to_datetime(np.random.randint(start_date.value, end_date.value, total_cases_hosp))
+    dates = dates.sort_values()
+
+    for d in dates:
+        device = np.random.choice(devices, p=device_weights)
+        risk = np.random.choice(risk_categories, p=risk_weights)
+        access = np.random.choice(access_routes, p=access_weights)
+        size = np.random.choice(valve_sizes)
+        
+        # Determine PVL outcome based on device
+        if device == 'Abbott Navitor':
+            pvl = np.random.choice(pvl_outcomes, p=pvl_weights_navitor)
+        else:
+            pvl = np.random.choice(pvl_outcomes, p=pvl_weights_others)
+            
+        # Determine procurement channel
+        if hosp['Country'] == 'Saudi Arabia':
+            if 'MOH' in hosp['Sector'] or 'NGHA' in hosp['Sector'] or 'MOD' in hosp['Sector']:
+                proc = 'NUPCO Framework (KSA)'
+            else:
+                proc = 'Private Insurance / Out-of-Pocket'
+        else:
+            if hosp['Sector'] == 'Private':
+                proc = 'Private Insurance / Out-of-Pocket'
+            else:
+                proc = np.random.choice(['Direct MOH Tender', 'Hospital Consignment'], p=[0.7, 0.3])
+                
+        # Key metrics
+        patient_age = np.random.randint(62, 89)
+        gender = np.random.choice(['Male', 'Female'], p=[0.54, 0.46])
+        proc_time_min = np.random.randint(45, 130)
+        hospital_stay_days = np.random.choice([1, 2, 3, 4, 5, 7], p=[0.2, 0.45, 0.2, 0.08, 0.05, 0.02])
+        success = 1 if pvl != 'Severe' and np.random.rand() > 0.01 else 0
+        unit_price_usd = 28000 if device == 'Abbott Navitor' else np.random.choice([29000, 30500, 27500])
+
+        case_records.append({
+            'Case_ID': f"TAVI-{case_id_counter}",
+            'Procedure_Date': d.strftime('%Y-%m-%d'),
+            'Year': d.year,
+            'Quarter': f"Q{d.quarter}",
+            'Country': hosp['Country'],
+            'City': hosp['City'],
+            'Hospital_Name': hosp['Hospital_Name'],
+            'Hospital_Sector': hosp['Sector'],
+            'Hospital_Tier': hosp['Tier'],
+            'Patient_Age': patient_age,
+            'Patient_Gender': gender,
+            'Risk_Stratification': risk,
+            'Device_Brand': device,
+            'Valve_Size': size,
+            'Access_Route': access,
+            'Procurement_Channel': proc,
+            'Procedural_Success': success,
+            'PVL_Severity_30D': pvl,
+            'Procedure_Duration_Min': proc_time_min,
+            'Length_of_Stay_Days': hospital_stay_days,
+            'Unit_ASP_USD': unit_price_usd
+        })
+        case_id_counter += 1
+
+cases_df = pd.DataFrame(case_records)
+
+# Export both dataset CSV files to VM storage
+hospitals_df.to_csv('Target_Hospitals_Scoring.csv', index=False)
+cases_df.to_csv('GCC_TAVI_Granular_Cases_Model.csv', index=False)
+
+print(f"Hospitals file created: {len(hospitals_df)} records.")
+print(f"Granular cases file created: {len(cases_df)} procedure records.")
