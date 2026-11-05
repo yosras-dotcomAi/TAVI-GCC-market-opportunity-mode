@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import os
 
 # Page Configuration
 st.set_page_config(
@@ -9,11 +10,34 @@ st.set_page_config(
     layout="wide"
 )
 
-# Load Datasets from data folder
+# Load Datasets dynamically (searches root or data folder automatically)
 @st.cache_data
 def load_data():
-    cases_df = pd.read_csv("data/GCC_TAVI_Granular_Cases_Model.csv")
-    hospitals_df = pd.read_csv("data/Target_Hospitals_Scoring.csv")
+    cases_file = "GCC_TAVI_Granular_Cases_Model.csv"
+    hosp_file = "Target_Hospitals_Scoring.csv"
+    
+    # Check if files are in root or data folder
+    if os.path.exists(cases_file):
+        cases_path = cases_file
+        hosp_path = hosp_file
+    elif os.path.exists(os.path.join("data", cases_file)):
+        cases_path = os.path.join("data", cases_file)
+        hosp_path = os.path.join("data", hosp_file)
+    else:
+        # Search recursively across repo
+        cases_path, hosp_path = None, None
+        for root, dirs, files in os.walk("."):
+            if cases_file in files:
+                cases_path = os.path.join(root, cases_file)
+            if hosp_file in files:
+                hosp_path = os.path.join(root, hosp_file)
+                
+    if not cases_path or not hosp_path:
+        st.error("⚠️ Data files not found. Please make sure `GCC_TAVI_Granular_Cases_Model.csv` and `Target_Hospitals_Scoring.csv` are uploaded to your GitHub repository.")
+        st.stop()
+        
+    cases_df = pd.read_csv(cases_path)
+    hospitals_df = pd.read_csv(hosp_path)
     return cases_df, hospitals_df
 
 cases_df, hospitals_df = load_data()
