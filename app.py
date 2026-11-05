@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
+import os
 
 # Page Configuration
 st.set_page_config(
@@ -10,11 +10,36 @@ st.set_page_config(
     layout="wide"
 )
 
-# Load Datasets
+# Load Datasets dynamically with fallback search
 @st.cache_data
 def load_data():
-    cases_df = pd.read_csv("data/GCC_TAVI_Granular_Cases_Model.csv")
-    hospitals_df = pd.read_csv("data/Target_Hospitals_Scoring.csv")
+    # File names
+    cases_filename = "GCC_TAVI_Granular_Cases_Model.csv"
+    hospitals_filename = "Target_Hospitals_Scoring.csv"
+    
+    # Path resolution logic
+    if os.path.exists(os.path.join("data", cases_filename)):
+        cases_path = os.path.join("data", cases_filename)
+        hospitals_path = os.path.join("data", hospitals_filename)
+    elif os.path.exists(cases_filename):
+        cases_path = cases_filename
+        hospitals_path = hospitals_filename
+    else:
+        # Search recursively for the CSV files inside the repository
+        cases_path = None
+        hospitals_path = None
+        for root, dirs, files in os.walk("."):
+            if cases_filename in files:
+                cases_path = os.path.join(root, cases_filename)
+            if hospitals_filename in files:
+                hospitals_path = os.path.join(root, hospitals_filename)
+                
+    if not cases_path or not os.path.exists(cases_path):
+        st.error(f"⚠️ Could not locate `{cases_filename}`. Please ensure the CSV files are committed and uploaded to your GitHub repository.")
+        st.stop()
+        
+    cases_df = pd.read_csv(cases_path)
+    hospitals_df = pd.read_csv(hospitals_path)
     return cases_df, hospitals_df
 
 cases_df, hospitals_df = load_data()
@@ -45,7 +70,7 @@ col4.metric("NUPCO Procurement Share (KSA)", f"{(filtered_df['Procurement_Channe
 
 st.divider()
 
-# Charts Tab Architecture
+# Tabs for Structured Layout
 tab1, tab2, tab3 = st.tabs(["📊 Market Volume & Scenarios", "🩺 Clinical Outcomes & PVL", "🏦 Hospital & NUPCO Mapping"])
 
 with tab1:
