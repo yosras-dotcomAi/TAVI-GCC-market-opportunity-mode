@@ -93,6 +93,11 @@ with tab1:
     st.subheader("Market Share Breakdown by Device System")
     fig_share = px.pie(filtered_df, names="Device_Brand", title="GCC TAVI Brand Share", hole=0.4, color_discrete_sequence=px.colors.qualitative.Pastel)
     st.plotly_chart(fig_share, use_container_width=True)
+ with tab2:
+       st.subheader("30-Day Paravalvular Leak (PVL) Severity Comparison")
+       # Fixed chart type to avoid grouping/fill errors
+       fig_pvl = px.histogram(filtered_df, x="Device_Brand", color="PVL_Severity_30D", barmode="group", title="PVL Safety Profile Across TAVI Systems")
+       st.plotly_chart(fig_pvl, use_container_width=True)
 
 
 with tab3:
