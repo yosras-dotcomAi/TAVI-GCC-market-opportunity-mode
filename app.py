@@ -83,7 +83,7 @@ col4.metric("NUPCO Procurement Share (KSA)", f"{(filtered_df['Procurement_Channe
 st.divider()
 
 # Tabs for Structured Layout
-tab1, tab2, tab3 = st.tabs(["📊 Market Volume & Scenarios", "🩺 Clinical Outcomes & PVL", "🏦 Hospital & NUPCO Mapping"])
+   tab1, tab3 = st.tabs(["📊 Market Volume & Scenarios", "🏦 Hospital & NUPCO Mapping"])
 
 with tab1:
     st.subheader("TAVI Procedure Volume Trends by Country")
@@ -94,11 +94,6 @@ with tab1:
     fig_share = px.pie(filtered_df, names="Device_Brand", title="GCC TAVI Brand Share", hole=0.4, color_discrete_sequence=px.colors.qualitative.Pastel)
     st.plotly_chart(fig_share, use_container_width=True)
 
-with tab2:
-    st.subheader("30-Day Paravalvular Leak (PVL) Severity Comparison")
-    # Fixed chart type to avoid grouping/fill errors
-    fig_pvl = px.histogram(filtered_df, x="Device_Brand", color="PVL_Severity_30D", barmode="group", title="PVL Safety Profile Across TAVI Systems")
-    st.plotly_chart(fig_pvl, use_container_width=True)
 
 with tab3:
     st.subheader("Target Hospital Network & Procurement Channels")
