@@ -54,6 +54,7 @@ def load_data():
     return cases_df, hospitals_df
 
 cases_df, hospitals_df = load_data()
+   st.warning("⚠️ ILLUSTRATIVE SYNTHETIC DATA ONLY. Not real patient, market-share, or device-performance data. For methodology demonstration purposes.")
 
 # Sidebar Filters
 st.sidebar.title("🔍 Strategic Filters")
