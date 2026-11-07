@@ -7,7 +7,8 @@ An interactive what-if model that sizes the transcatheter aortic valve implantat
 | | |
 |---|---|
 | **Live dashboard** | [Open the Streamlit app](https://tavi-gcc-market-opportunity-mode-iy7nxbmcjkkcg6eudp7aud.streamlit.app/) |
-| **Project slides** | [View the presentation](docs/GCC_TAVI_Opportunity_Model_Slides.pptx) |
+| **Project slides** | [View the presentation]([GCC_TAVI_Opportunity_Model_Slides.pptx](https://github.com/user-attachments/files/34524061/GCC_TAVI_Opportunity_Model_Slides.pptx)
+ |
 
 ---
 
