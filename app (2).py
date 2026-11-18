@@ -53,7 +53,7 @@ REGISTRY_COUNTRIES = ["Saudi Arabia", "Kuwait", "Bahrain", "Oman"]
 SCENARIOS = {
     "A - Conservative": "Symptomatic severe AS not treated surgically (high-risk / inoperable proxy)",
     "B - Expanded": "A plus a share of surgically treated patients shifting to TAVI (lower-risk indications)",
-    "C - Full 75+ (ceiling)": "All symptomatic severe AS aged 75+ (guideline ceiling, not a forecast)",
+    "C - Full 75+ (ceiling)": "All symptomatic severe AS aged 75+ (a ceiling for this age group, not a forecast; the 2025 ESC/EACTS guideline reaches younger and asymptomatic patients, see the Sources tab)",
 }
 
 
@@ -265,6 +265,21 @@ with tab3:
 
 # ----------------------------- TAB 4 ----------------------------------------
 with tab4:
+    st.subheader("Guideline basis: 2025 ESC/EACTS")
+    st.markdown(
+        """
+The clinical rules behind the patient pool come from the 2025 ESC/EACTS Guidelines for the management of valvular heart disease (see Sources). What changed versus the 2021 version, and how it relates to this model:
+
+- **Age:** TAVI is now recommended as the primary option from age 70, for patients with a tricuspid aortic valve, suitable anatomy and transfemoral access (Class I, Level A). The earlier cut-off was 75. **This model counts residents aged 75+ only**, so it leaves out the 70 to 74 group.
+- **Asymptomatic patients:** early intervention can be considered in asymptomatic severe high-gradient aortic stenosis with preserved LVEF when procedural risk is low (Class IIa, Level A). **This model counts symptomatic patients only.** The guideline notes that up to 40% of patients with severe AS have no symptoms at diagnosis.
+- **Centres:** a Heart Valve Centre is expected to have on-site interventional cardiology and cardiac surgery with 24-hour cover, a Heart Team, and high procedure volume. The guideline cites about 50 TAVI procedures a year per operator, and about 100 per centre, as linked to better outcomes. This is the standard behind a centre-readiness screen for target hospitals.
+- **Aortic regurgitation:** TAVI may be considered in selected non-surgical patients (Class IIb). This model covers aortic stenosis only.
+
+**What this means for the numbers:** Scenario C is a ceiling for symptomatic patients aged 75+. Under the 2025 guideline the eligible population is wider, so the volumes here are more conservative than before. A scenario covering ages 70 to 74 and asymptomatic patients is not built yet, because it needs inputs that are not sourced in this project: the 70 to 74 population by country, severe AS prevalence for that age group, and the share of asymptomatic patients who meet the guideline criteria.
+
+**Limits of this link:** this is a European guideline. It sets clinical indications, not what Gulf hospitals, regulators or payers do in practice, and local adoption has not been checked here.
+        """
+    )
     st.subheader("Method")
     st.markdown(
         """
@@ -279,6 +294,7 @@ with tab4:
     st.subheader("Sources")
     st.markdown(
         """
+- Praz F, Borger MA, Lanz J, et al. 2025 ESC/EACTS Guidelines for the management of valvular heart disease. *Eur Heart J* 2025;46(44):4635-4736, doi 10.1093/eurheartj/ehaf194. A correction was published in *Eur Heart J* 2026;47(38):5507, doi 10.1093/eurheartj/ehag625.
 - United Nations, *World Population Prospects 2024*, medium variant (2026 projection), via populationpyramids.org country pages.
 - Osnabrugge RL et al. Aortic stenosis in the elderly: disease prevalence and number of candidates for TAVR. *J Am Coll Cardiol* 2013;62(11):1002-12.
 - Gulf TAVR Registry (one-year outcomes), 795 patients, eight centres, 2017-2019; QATAVI registry, *Int J Cardiol* 2025; Albugami et al., *Cureus* 2021 (Jeddah).
@@ -289,7 +305,7 @@ with tab4:
     st.subheader("Known limitations")
     st.markdown(
         """
-- Western epidemiology applied to Gulf residents; age cut-off at 75 excludes younger patients.
+- Western epidemiology applied to Gulf residents; the age cut-off at 75 excludes the 70 to 74 group that the 2025 ESC/EACTS guideline now includes, and asymptomatic patients are not counted.
 - Population counts include large expatriate working-age groups, so elderly counts are small relative to total population.
 - Non-Saudi countries use the Saudi price references unless you change them.
 - No reimbursement, tender, center-capacity or competitor effects are modeled.
