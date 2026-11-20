@@ -1,88 +1,42 @@
-# GCC TAVI Market Opportunity Model
+# A Candidate's 12-Month Approach to Growing TAVI in the GCC
 
-An interactive what-if model that sizes the transcatheter aortic valve implantation (TAVI) opportunity across the six Gulf Cooperation Council countries: Saudi Arabia, UAE, Oman, Kuwait, Bahrain and Qatar.
+> **Independent proposal.** Written by the author as an individual candidate, using public information only. It is not a company document, it contains no confidential or employer information, and it makes no claim about any manufacturer's products.
 
-> **Independent project built only from public data. Not affiliated with or endorsed by any manufacturer or employer.**
+## Starting point
 
-| | |
-|---|---|
-| **Live dashboard** | [Open the Streamlit app](https://tavi-gcc-market-opportunity-mode-iy7nxbmcjkkcg6eudp7aud.streamlit.app/) |
-| **Project slides** | [View the presentation]([GCC_TAVI_Opportunity_Model_Slides.pptx](https://github.com/user-attachments/files/34524061/GCC_TAVI_Opportunity_Model_Slides.pptx)
- |
+From the [GCC TAVI Market Opportunity Model](../README.md) (Scenario B, base epidemiology, six countries):
 
----
+- About 9,478 eligible patients, 872 new candidates a year and about 436 procedures a year under the what-if inputs.
+- Saudi Arabia accounts for about 65% of new candidates.
+- Published Gulf registry activity already equals 61% of the conservative candidate estimate, so the model is a **floor**, not a forecast.
+- The 2025 ESC/EACTS guideline widens eligibility (TAVI from age 70, early intervention in selected asymptomatic patients), so the real opportunity is likely larger.
 
-## The question
+## How growth happens
 
-How large is the TAVI opportunity in the Gulf, where is it concentrated, and how sensitive is it to the assumptions that drive it?
+Share grows in two ways: more patients get treated (**grow the pie**), and a larger part of treated patients use your valve (**grow the slice**). The pathway and capacity analysis is in [Business-Clinical-Question](https://github.com/yosras-dotcomAi/Business-Clinical-Question).
 
-## How to read this model
+## Four priorities, as questions to test
 
-- **Sourced inputs:** population aged 75+ and aortic stenosis epidemiology come from published sources, with low, base and high bounds.
-- **What-if inputs:** procedure volumes, prices, market shares and margins are assumptions you control in the sidebar. They are not observed data.
-- **A floor, not a forecast:** the model is a demographic floor. It frames the size of the opportunity and does not predict sales.
-
-## What the dashboard shows
-
-The dashboard has four tabs:
-
-1. **Market funnel:** from residents aged 75+ to severe aortic stenosis, symptomatic patients and the eligible pool, plus where the older population sits by country, with a published uncertainty range.
-2. **Procedures, cost and profit:** annual candidates, procedures, market value, modeled revenue and operating profit by country, a revenue-to-profit waterfall, and a sensitivity grid across penetration and market share.
-3. **Reality check and evidence:** the model compared with published Gulf registry activity.
-4. **Sources and method:** the evidence points and assumptions used.
-
-**Controls:** country selection, patient-pool scenario (A Conservative, B Expanded, C Full 75+ ceiling), epidemiology bound (low, base, high), the share of surgically treated patients shifting to TAVI, and what-if volume, price and margin inputs.
-
-## Headline results
-
-Scenario B (Expanded), base epidemiology, all six countries:
-
-| Metric | Value |
-|---|---|
-| Eligible pool (stock) | 9,478 |
-| New candidates per year | 872 |
-| Procedures per year (what-if) | 436 |
-| Market value per year | $18.4M |
-| Modeled revenue per year | $2.23M |
-| Operating profit per year | $0.89M |
-
-Saudi Arabia accounts for about 65% of the 75+ population in the region and roughly two thirds of every output metric.
-
-## Reality check
-
-The model's candidate volumes were compared with the Gulf TAVR Registry (8 centres in Saudi Arabia, Kuwait, Bahrain and Oman, 2017-2019, 265 procedures per year).
-
-| Scenario | Modeled annual candidates | Registry as % of model |
+| Priority | Question | What to measure |
 |---|---|---|
-| A - Conservative | 437 | 61% |
-| B - Expanded | 757 | 35% |
-| C - Full 75+ (ceiling) | 1,078 | 25% |
+| 1. Centre readiness | Which hospitals meet Heart Valve Centre standards (Heart Team, hybrid room, 24-hour cover, volume near 100 procedures a year), and which are close? | Centres meeting each criterion, procedures per centre |
+| 2. Pathway speed | Where do patients wait between referral and procedure? | Referral-to-procedure days by stage |
+| 3. Access and procurement | How do central purchasing bodies (for example NUPCO in Saudi Arabia) and public tenders shape which devices a hospital can use, and how long does that take? | Tender cycles and listing requirements from public notices |
+| 4. Evidence and training | Which outcome data do Gulf Heart Teams rely on, and what training do new centres need? | Gulf TAVR Registry and QATAVI outcomes, operator and centre volumes |
 
-Eight centres alone recorded a large fraction of the conservative estimate, so real activity is likely well above what a demographic model implies. Volume outputs should be treated as a floor until calibrated against centre-level data.
+## First 90 days
 
-## Limitations
+These are steps to validate, not commitments.
 
-- Regional evidence is thin: one multi-centre registry, one Qatar registry and one Jeddah series.
-- The model counts only residents aged 75+ and uses prevalence from Western populations.
-- Prices and margins are what-if inputs. The Saudi cost-effectiveness study used as a price anchor was commissioned by a manufacturer, so it is treated as one transparent data point, not a market price list.
-- No device-to-device performance comparison is made.
+1. Replace modelled assumptions with centre-level activity from public sources and published registries.
+2. Map the referral pathway at two or three centres through conversations with clinicians.
+3. Review public tender and catalogue requirements in each country.
+4. Rank the levers by impact and feasibility, and choose two or three to act on.
 
-## Next steps
+## What this does not claim
 
-- Calibrate volumes against centre-level activity.
-- Add adjustments for local disease prevalence.
-- Test pricing and share scenarios against real market feedback.
+- No sales forecast. Volumes are a floor built from demographics.
+- No hospital-level figures. Centre data would be added only from public, citable sources.
+- The 2025 ESC/EACTS guideline is European and does not describe Gulf practice or payer rules.
 
-## Run it locally
-
-```bash
-git clone <your-repo-url>
-cd <your-repo-folder>
-pip install -r requirements.txt
-streamlit run app.py
-```
-
-## Author
-
-**Yosra**, Cath Lab Head Nurse moving into healthcare data analytics.
-GitHub: [yosras-dotcomAi](https://github.com/yosras-dotcomAi)
+Sources: see the Sources and method tab of the dashboard, which lists every reference.
