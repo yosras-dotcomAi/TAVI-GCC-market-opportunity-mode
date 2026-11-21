@@ -257,8 +257,7 @@ with tab3:
     st.markdown(
         """
 - **Regional evidence is thin.** The Gulf TAVR Registry covers eight high-volume centres in Saudi Arabia, Kuwait, Bahrain and Oman (2017-2019); Qatar's registry covers 241 patients at one hospital (2012-2023); a Jeddah series covers 52 patients.
-- **Navitor CE mark.** Abbott announced an expanded CE mark in August 2025 extending the Navitor indication to low and intermediate surgical risk in Europe. Sources found describe the US indication as high or extreme risk only; verify current status before quoting.
-- **Navitor trial data.** Abbott's announcement cites the VANTAGE study (technical success of about 97%, no moderate-or-worse paravalvular leak at 30 days). This dashboard makes no device-to-device performance comparison.
+- **Devices.** Device approvals and indications differ by region and change over time. This dashboard sizes patient demand and does not compare devices or manufacturers.
 - **Saudi cost anchors.** A 2026 peer-reviewed Saudi cost-effectiveness study reports a TAVI valve cost of SAR 127,761 (NUPCO 2025 price for SAPIEN 3) and an intervention cost of SAR 30,667. The study was commissioned by Edwards Lifesciences, so treat it as one transparent data point, not a market price list.
         """
     )
@@ -299,7 +298,6 @@ The clinical rules behind the patient pool come from the 2025 ESC/EACTS Guidelin
 - Osnabrugge RL et al. Aortic stenosis in the elderly: disease prevalence and number of candidates for TAVR. *J Am Coll Cardiol* 2013;62(11):1002-12.
 - Gulf TAVR Registry (one-year outcomes), 795 patients, eight centres, 2017-2019; QATAVI registry, *Int J Cardiol* 2025; Albugami et al., *Cureus* 2021 (Jeddah).
 - Al-Omar HA et al. Cost-effectiveness of TAVI for asymptomatic severe AS in Saudi Arabia. *Front Cardiovasc Med* 2026, doi 10.3389/fcvm.2026.1937664 (funded by Edwards Lifesciences).
-- Abbott press materials on the Navitor expanded CE mark (August 2025), as reported by trade media.
         """
     )
     st.subheader("Known limitations")
